@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TEJICO - Digital Innovation</title>
+    <link rel="stylesheet" href="https://use.typekit.net/qxk3wcu.css" />
+    <link rel="icon" type="image/png" href="library/favicon.png" />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      /* Font applied to headers */
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "eurostile", sans-serif;
+        font-weight: 900;
+        font-style: normal;
+      }
+
+      /* Other styles */
+      body {
+        background-color: #000;
+        color: #fff;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .grid-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(
+            to right,
+            #00f5ff08 1px,
+            transparent 1px
+          ),
+          linear-gradient(to bottom, #00f5ff08 1px, transparent 1px);
+        background-size: 50px 50px;
+        z-index: -1;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 1.5rem;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        z-index: 101;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: #fff;
+        margin: 5px 0;
+        transition: 0.3s;
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .hamburger {
+          display: block;
+        }
+
+        .nav-links {
+          display: none !important;
+          position: fixed;
+          top: 70px;
+          left: 0;
+          width: 100%;
+          background: rgba(0, 0, 0, 0.95);
+          backdrop-filter: blur(10px);
+          padding: 1rem;
+          flex-direction: column !important;
+          align-items: center;
+          gap: 1rem !important;
+        }
+
+        .nav-links.active {
+          display: flex !important;
+        }
+
+        .nav-links a {
+          width: 100%;
+          text-align: center;
+          padding: 0.5rem 0;
+        }
+      }
+
+      .main-content {
+        padding-top: 100px;
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 10%;
+        min-height: 80vh;
+      }
+
+      .hero h1 {
+        font-size: 6rem;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        max-width: 800px;
+      }
+
+      .hero p {
+        font-size: 1.5rem; /* larger for hero section */
+        line-height: 1.6;
+      }
+
+      .about-content p {
+        font-size: 1.3rem; /* different size for about section */
+        line-height: 1.6;
+      }
+
+      .service-item h3 {
+        font-size: 1.8rem; /* different size for service items */
+        line-height: 1.5;
+      }
+
+      .service-item p {
+        font-size: 1.3rem; /* different size for service items */
+        line-height: 1.5;
+      }
+
+      .highlight {
+        color: #0dd1ff;
+        font-family: "eurostile", sans-serif;
+        font-weight: 900;
+        font-style: normal;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2px;
+        background: #0dd1ff;
+        padding: 2px;
+        margin: 0 10%;
+      }
+
+      .service-item {
+        background: #000;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .service-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 2px;
+        height: 0;
+        background: #0dd1ff;
+        transition: height 0.3s ease;
+      }
+
+      .service-item:hover::before {
+        height: 100%;
+      }
+
+      .service-number {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        font-size: 4rem;
+        opacity: 0.1;
+        font-weight: bold;
+        color: #0dd1ff;
+      }
+
+      .section {
+        padding: 6rem 10%;
+        position: relative;
+      }
+
+      .section::before {
+        content: "";
+        position: absolute;
+        left: 10%;
+        top: 0;
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #0dd1ff, transparent);
+      }
+
+      .section-title {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        color: #fff; /* or #fff if you want white */
+      }
+
+      .about-content {
+        max-width: 800px;
+        font-size: 1.1rem;
+        color: #ccc;
+      }
+
+      .about-content p {
+        margin-bottom: 2rem;
+      }
+
+      .clients-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+      }
+
+      .client-item {
+        background: rgba(0, 245, 255, 0.02);
+        padding: 2.5rem;
+        text-align: center;
+        border: 1px solid rgba(0, 245, 255, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        /* Add these new styles for text */
+        font-family: "eurostile", sans-serif; /* same as headings */
+        font-weight: 900;
+        font-size: 1.5rem; /* adjust size as needed */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .client-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgba(0, 245, 255, 0.1),
+          transparent
+        );
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .client-item:hover::before {
+        transform: translateX(100%);
+      }
+
+      .client-item:hover {
+        border-color: #0dd1ff;
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(0, 245, 255, 0.2);
+        color: #fff;
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.3rem;
+        font-family: "eurostile", sans-serif;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #0dd1ff;
+        background: rgba(0, 245, 255, 0.05);
+      }
+
+      textarea.form-input {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .submit-button {
+        background: transparent;
+        color: #0dd1ff;
+        padding: 1rem 3rem;
+        border: 1px solid #0dd1ff;
+        cursor: pointer;
+        font-family: "eurostile", sans-serif;
+        font-weight: 900;
+        font-style: normal;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease;
+      }
+
+      .submit-button:hover {
+        background: #23d4fc;
+        color: #000;
+      }
+
+      @media (max-width: 1024px) {
+        .services-grid,
+        .clients-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hero h1 {
+          font-size: 4rem;
+        }
+        .section-title {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        /* Hero section mobile */
+        .hero h1 {
+          font-size: 3rem; /* slightly smaller but still prominent */
+        }
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        /* Services section mobile */
+        .service-item h3 {
+          font-size: 1.5rem;
+        }
+        .service-item p {
+          font-size: 1.1rem;
+        }
+
+        /* About section mobile */
+        .about-content p {
+          font-size: 1.1rem;
+        }
+
+        /* Clients section mobile */
+        .clients-grid {
+          grid-template-columns: repeat(2, 1fr); /* two columns */
+          gap: 0.8rem; /* reduced gap for better fit */
+          margin: 0; /* remove side margins */
+        }
+
+        .client-item {
+          font-size: 1.1rem; /* smaller font to fit */
+          padding: 1.5rem 1rem; /* reduced padding, especially horizontal */
+          text-align: center;
+          word-break: break-word;
+          hyphens: auto;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 90px; /* slightly reduced height */
+          letter-spacing: 1px; /* reduce letter spacing */
+        }
+      }
+
+      /* Contact form mobile */
+      .form-input {
+        font-size: 1.1rem;
+      }
+      .form-input::placeholder {
+        font-size: 1.1rem;
+      }
+      .submit-button {
+        font-size: 1.2rem;
+        padding: 0.8rem 2rem; /* smaller padding on mobile */
+        width: 100%; /* full width button on mobile */
+      }
+
+      .section {
+        padding: 4rem 5%; /* reduced padding on sides */
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr; /* change to single column */
+        gap: 0.15rem; /* increase gap between items */
+        margin: 0; /* remove side margins */
+      }
+
+      .service-item {
+        min-height: auto; /* remove fixed height */
+        padding: 2rem; /* comfortable padding */
+      }
+
+      .clients-grid {
+        gap: 1rem; /* reduced gap */
+      }
+
+      .nav-links {
+        padding: 2rem 1rem; /* more vertical padding */
+      }
+
+      .nav-links a {
+        padding: 1rem 0;
+        font-size: 1.2rem; /* slightly larger for better touch targets */
+      }
+
+      .grid-background {
+        background-size: 30px 30px; /* smaller grid pattern */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-background"></div>
+    <nav
+      style="display: flex; align-items: center; justify-content: space-between"
+    >
+      <img src="library/logo.png" alt="TEJICO Logo" style="max-width: 111px" />
+
+      <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div
+        class="nav-links"
+        style="display: flex; align-items: center; gap: 2rem; margin-left: auto"
+      >
+        <a href="#about" style="color: #fff; text-decoration: none">About Us</a>
+        <a href="#clients" style="color: #fff; text-decoration: none"
+          >Our Clients</a
+        >
+        <a href="#contact" style="color: #fff; text-decoration: none"
+          >Contact Us</a
+        >
+        <a href="#book-meeting" style="color: #fff; text-decoration: none"
+          >Book Meeting</a
+        >
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <section class="hero">
+        <h1>
+          CREATING DIGITAL <span class="highlight">EXCELLENCE</span> THROUGH
+          INNOVATION
+        </h1>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">WHAT WE DO</h2>
+        <div class="services-grid">
+          <div class="service-item">
+            <div>
+              <h3>CONTENT CREATION</h3>
+              <p>
+                Compelling narratives that captivate and convert your target
+                audience
+              </p>
+            </div>
+            <div class="service-number">01</div>
+          </div>
+          <div class="service-item">
+            <div>
+              <h3>SOCIAL MEDIA AUTOMATION</h3>
+              <p>
+                Intelligent automation solutions for consistent brand presence
+              </p>
+            </div>
+            <div class="service-number">02</div>
+          </div>
+          <div class="service-item">
+            <div>
+              <h3>DESIGN & BRANDING</h3>
+              <p>Visual identities that make lasting impressions</p>
+            </div>
+            <div class="service-number">03</div>
+          </div>
+          <div class="service-item">
+            <div>
+              <h3>MANUFACTURING & LOGISTICS</h3>
+              <p>Streamlined production and distribution solutions</p>
+            </div>
+            <div class="service-number">04</div>
+          </div>
+          <div class="service-item">
+            <div>
+              <h3>STRATEGY</h3>
+              <p>Strategic planning for sustainable digital growth</p>
+            </div>
+            <div class="service-number">05</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <h2 class="section-title">ABOUT US</h2>
+        <div class="about-content">
+          <p>
+            TEJICO is a team of internet-native digital innovators and creatives
+            who understand the pulse of the web. We stay ahead of social trends
+            and emerging technologies, bringing cutting-edge solutions to our
+            clients.
+          </p>
+          <p>
+            We believe in straightforward communication and transparent
+            relationships with our clients. From day one, we set clear
+            expectations and maintain open dialogue to ensure everyone is
+            aligned with the project's vision and goals.
+          </p>
+          <p>
+            Whether you're just starting out or looking to scale your digital
+            presence, we're here to support your journey. From initial concepts
+            to comprehensive creative direction, we transform ideas into
+            reality.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="clients">
+        <h2 class="section-title">WHO WE'VE WORKED WITH</h2>
+        <div class="clients-grid">
+          <div class="client-item">Azuki</div>
+          <div class="client-item">TEJI</div>
+          <div class="client-item">Arc'teryx</div>
+          <div class="client-item">Carriage Works</div>
+          <div class="client-item">Budgy Smuggler</div>
+          <div class="client-item">Fragile Minds</div>
+          <div class="client-item">Burrito DAO</div>
+          <div class="client-item">Man Up Down Under</div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <h2 class="section-title">CONTACT US</h2>
+        <form class="contact-form">
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Name" required />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-input"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Company" />
+          </div>
+          <div class="form-group">
+            <textarea
+              class="form-input"
+              placeholder="Tell us about your project"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-button">Send Message</button>
+        </form>
+      </section>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        navLinks.classList.toggle("active");
+
+        const hamburger = document.querySelector(".hamburger");
+        const spans = hamburger.getElementsByTagName("span");
+
+        if (navLinks.classList.contains("active")) {
+          spans[0].style.transform = "rotate(-45deg) translate(-5px, 6px)";
+          spans[1].style.opacity = "0";
+          spans[2].style.transform = "rotate(45deg) translate(-5px, -6px)";
+        } else {
+          spans[0].style.transform = "none";
+          spans[1].style.opacity = "1";
+          spans[2].style.transform = "none";
+        }
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const navLinks = document.querySelector(".nav-links");
+        const hamburger = document.querySelector(".hamburger");
+
+        if (
+          !hamburger.contains(event.target) &&
+          !navLinks.contains(event.target)
+        ) {
+          navLinks.classList.remove("active");
+          const spans = hamburger.getElementsByTagName("span");
+          spans[0].style.transform = "none";
+          spans[1].style.opacity = "1";
+          spans[2].style.transform = "none";
+        }
+      });
+
+      // Close menu when clicking a link
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          const navLinks = document.querySelector(".nav-links");
+          navLinks.classList.remove("active");
+          const spans = document
+            .querySelector(".hamburger")
+            .getElementsByTagName("span");
+          spans[0].style.transform = "none";
+          spans[1].style.opacity = "1";
+          spans[2].style.transform = "none";
+        });
+      });
+    </script>
+  </body>
+</html>
