@@ -1,0 +1,461 @@
+/* ==========================================================================
+   1. Reset & Base Styles
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: #fff;
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+}
+
+/* ==========================================================================
+   2. Typography
+   ========================================================================== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "eurostile", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.section-title {
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  color: #fff;
+}
+
+/* ==========================================================================
+   3. Layout & Grid
+   ========================================================================== */
+.main-content {
+  padding-top: 100px;
+}
+
+.section {
+  padding: 6rem 10%;
+  position: relative;
+}
+
+.section::before {
+  content: "";
+  position: absolute;
+  left: 10%;
+  top: 0;
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #0dd1ff, transparent);
+}
+
+/* Grid Background */
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #00f5ff08 1px, transparent 1px),
+    linear-gradient(to bottom, #00f5ff08 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+}
+
+/* Scroll Offset */
+#about,
+#clients,
+#contact {
+  scroll-margin-top: 100px;
+}
+
+/* ==========================================================================
+   4. Navigation
+   ========================================================================== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  max-width: 111px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-left: auto;
+}
+
+.nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-family: "eurostile", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 101;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
+/* ==========================================================================
+   5. Hero Section
+   ========================================================================== */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 4rem 10% 8rem;
+  min-height: 80vh;
+}
+
+.hero h1 {
+  font-size: 6rem;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  max-width: 800px;
+}
+
+.highlight {
+  color: #0dd1ff;
+  font-family: "eurostile", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* ==========================================================================
+   6. Services Grid
+   ========================================================================== */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: #0dd1ff;
+  padding: 2px;
+  margin: 0 10%;
+}
+
+.service-item {
+  background: #000;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.service-item h3 {
+  font-size: 1.8rem;
+  line-height: 1.5;
+}
+
+.service-item p {
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.service-number {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 4rem;
+  opacity: 0.1;
+  font-weight: bold;
+  color: #0dd1ff;
+}
+
+.service-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 0;
+  background: #0dd1ff;
+  transition: height 0.3s ease;
+}
+
+.service-item:hover::before {
+  height: 100%;
+}
+
+/* ==========================================================================
+   7. About Section
+   ========================================================================== */
+.about-content {
+  max-width: 800px;
+  color: #ccc;
+}
+
+.about-content p {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* ==========================================================================
+   8. Clients Grid
+   ========================================================================== */
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.client-item {
+  background: rgba(0, 245, 255, 0.02);
+  padding: 2.5rem;
+  text-align: center;
+  border: 1px solid rgba(0, 245, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: "eurostile", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.client-item:hover {
+  border-color: #0dd1ff;
+}
+
+/* ==========================================================================
+   9. Contact Form
+   ========================================================================== */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(0, 245, 255, 0.2);
+  color: #fff;
+  font-size: 1.3rem;
+  font-family: "Inter", sans-serif; /* Changed from eurostile */
+  transition: all 0.3s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.3rem;
+  font-family: "Inter", sans-serif;
+}
+
+textarea.form-input {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.submit-button {
+  background: transparent;
+  color: #0dd1ff;
+  padding: 1rem 3rem;
+  border: 1px solid #0dd1ff;
+  cursor: pointer;
+  font-family: "eurostile", sans-serif;
+  font-weight: 900;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.submit-button:hover {
+  background: #23d4fc;
+  color: #000;
+}
+
+/* ==========================================================================
+   10. Media Queries
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 4rem;
+  }
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  /* Updated services grid styles */
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 5%; /* Reduced margin */
+    gap: 1rem; /* Increased gap */
+  }
+
+  /* Adjust service items for better fit */
+  .service-item {
+    min-height: 250px; /* Reduced height */
+  }
+
+  .service-item h3 {
+    font-size: 1.6rem; /* Slightly smaller text */
+    margin-bottom: 1rem;
+  }
+
+  .service-item p {
+    font-size: 1.1rem; /* Smaller text */
+  }
+
+  .service-number {
+    font-size: 3rem; /* Smaller number */
+  }
+
+  /* Client grid adjustments */
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navigation */
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none !important;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem 1rem;
+    flex-direction: column !important;
+    align-items: center;
+    gap: 1rem !important;
+  }
+
+  .nav-links.active {
+    display: flex !important;
+  }
+
+  /* Hero */
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  /* Services */
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+    margin: 0;
+  }
+
+  .service-item {
+    min-height: auto;
+    padding: 2rem;
+  }
+
+  /* Sections */
+  .section {
+    padding: 4rem 5%;
+  }
+
+  /* Typography */
+  .service-item h3 {
+    font-size: 1.5rem;
+  }
+  .service-item p {
+    font-size: 1.1rem;
+  }
+  .about-content p {
+    font-size: 1.1rem;
+  }
+
+  /* Clients */
+  .clients-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    margin: 0;
+  }
+
+  .client-item {
+    font-size: 1.1rem;
+    padding: 1.5rem 1rem;
+    min-height: 90px;
+    letter-spacing: 1px;
+  }
+
+  /* Form */
+  .form-input,
+  .form-input::placeholder {
+    font-size: 1.1rem;
+  }
+
+  .submit-button {
+    font-size: 1.2rem;
+    padding: 0.8rem 2rem;
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   11. Footer
+   ========================================================================== */
+.footer {
+  padding: 2rem 10%;
+  text-align: center;
+  border-top: 1px solid rgba(13, 209, 255, 0.1);
+  margin-top: 4rem;
+}
+
+.footer p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+/* Add this to your mobile media query if needed */
+@media (max-width: 768px) {
+  .footer {
+    padding: 1.5rem 5%;
+    margin-top: 2rem;
+  }
+}
