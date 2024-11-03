@@ -245,15 +245,32 @@ nav {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  font-family: "eurostile", sans-serif;
-  font-weight: 900;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.client-logo {
+  width: 100%;
+  height: auto;
+  max-width: 250px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.client-item:hover .client-logo {
+  opacity: 1;
 }
 
 .client-item:hover {
   border-color: #0dd1ff;
+}
+
+/* Add these adjustments to your existing media queries section */
+@media (max-width: 768px) {
+  .client-logo {
+    max-width: 120px;
+  }
 }
 
 /* ==========================================================================
